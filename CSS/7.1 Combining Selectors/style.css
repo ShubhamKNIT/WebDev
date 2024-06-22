@@ -1,0 +1,26 @@
+/* Write your code here: */
+
+/* multiple element selector */
+h1, h2 {
+    color: blueviolet; 
+}
+
+/* parent > child */    
+.box > p {
+    color: firebrick;
+}
+
+/* descendent selector */
+.box li {
+    color: blue;
+}
+
+/* chaining selector - apply where all selectors are true */
+li.done {
+    color: green;
+}
+
+/* combining selectors - combinators */
+body ul > p.done {
+    font-size: 0.5rem;
+}

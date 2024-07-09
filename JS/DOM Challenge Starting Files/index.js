@@ -1,0 +1,1 @@
+document.lastElementChild.querySelector('ul').lastElementChild.innerHTML = 'Name';

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Chatbot</title>
+</head>
+
+<body>
+  <div class="js-container"></div>
+  <script src="react-basics.js"></script>
+  <script src="https://unpkg.com/supersimpledev/react.js"></script>
+  <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+  <script type="text/babel">
+
+    function ChatInput() {
+      return (
+        <>
+          <input />
+          <button>Send</button>
+        </>
+      );
+    }
+
+    // function ChatMessage(props) { // every React component must start with Capital Letter
+    //   const { sender, message } = props; // destructuring
+    // function ChatMessage({ sender, message }) {
+    //   if (sender === "robot") {
+    //     return (
+    //       <div>
+    //         {message}
+    //         <img src="robot.png" alt="robot image" width="50" />
+    //       </div>
+    //     );      
+    //   }
+
+    //   return (
+    //     <div>
+    //       {message}
+    //       <img src="user.png" alt="user image" width="50" />
+    //     </div>
+    //   );
+    // }
+
+    // function SenderImage({ sender }) {
+    //   if (sender === "robot") {
+    //     return (
+    //       <img src="robot.png" alt="robot image" width="50" />
+    //     );
+    //   }
+    //   else {
+    //     return (
+    //       <img src="user.png" alt="user image" width="50" />
+    //     );
+    //   }
+    // }
+
+    // function ChatMessage({ sender, message }) {
+    //   return (
+    //     <div>
+    //       <SenderImage sender={sender}/>
+    //       {message}
+    //     </div>
+    //   );
+    // }
+
+
+    function ChatMessage({ sender, message }) {
+      return (
+        <div>
+          {(sender === 'robot') && <img src="robot.png" alt="robot image" width="50" />}
+          {message}
+          {(sender === 'user') && <img src="user.png" alt="user image" width="50" />}
+        </div>
+      );
+    }
+
+    function App () {
+      return (
+        <>
+          <ChatInput />
+          <ChatMessage sender="user" message="hello chatbot" />
+          <ChatMessage sender="robot" message="Hi, Let me know how I can help!" />
+          <ChatMessage sender="user" message="hello chatbot" />
+          <ChatMessage sender="robot" message="Hi, Let me know how I can help!" />
+        </>
+      );
+    }
+
+    const container = document.querySelector('.js-container');
+    const root = ReactDOM.createRoot(container);
+    root.render(
+      <App />
+    );
+  </script>
+</body>
+
+</html>

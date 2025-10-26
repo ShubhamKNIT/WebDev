@@ -10,29 +10,47 @@
   <script src="https://unpkg.com/supersimpledev/react.js"></script>
   <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
-  <script src="https://unpkg.com/supersimpledev@8.0.1/chatbot.js"></script>"></script>
+  <script src="https://unpkg.com/supersimpledev@8.0.1/chatbot.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/async/3.2.6/async.min.js" integrity="sha512-Ps4UroO9GAII8QTM2IE4KcHjslTEZjoZY6OhztAFKSnnqshNnPR8PQl1usQpGiHQXnyRCwEMZAsVJgGg2z8Kog==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.js"></script>
   <script type="text/babel">
 
-    function ChatInput({ chatMessages, setChatMessages }) {
+    function ChatInput({ chatMessages, setChatMessages, loading, setLoading }) {
       const [inputText, setInputText] = React.useState('');
 
       function saveInputText(event) {
         setInputText(event.target.value);
       }
 
-      function sendMessage() {
+      function checkEscape(event) {
+        // console.log(event.key);
+        if (event.key == "Escape") {
+          setInputText("");
+        }
+      }
+
+
+      async function sendMessage() {
+        if (loading || inputText === "") return;
+
+        const text = inputText;
+        setInputText("");
+        setLoading(true);
+
         const newChatMessages = [
           ...chatMessages, // spread operator => to copy the old data
           {
             sender: "user",
-            message: inputText,
+            message: text,
             id: crypto.randomUUID()
           }
         ];
 
+        setChatMessages(newChatMessages);
+
         // getResponse
-        const response = Chatbot.getResponse(inputText);
+        const response = await Chatbot.getResponseAsync(text);
+
         // console.log(response);
         setChatMessages([
           ...newChatMessages, // spread operator => to copy the old data
@@ -44,6 +62,7 @@
         ]);
 
         setInputText(""); // set input to empty after button click
+        setLoading(false);
       }
 
       return (
@@ -51,10 +70,11 @@
           <input 
             placeholder="Send a message to Chatbot"
             size="30"
-            onChange={saveInputText}
             value={inputText}
+            onChange={saveInputText}
+            onKeyDown={checkEscape}
           />
-          <button onClick={sendMessage}>Send</button>
+          <button onClick={sendMessage} disabled={loading}>Send</button>
         </>
       );
     }
@@ -182,20 +202,29 @@
         message: "Hi, Let me know how I can help!",
         id: "4"
       }]);
-      
+
       // const chatMessages = array[0];
       // const setChatMessages = array[1];
       const [chatMessages, setChatMessages] = array;
+      const [loading, setLoading] = React.useState(false);
 
       return (
         <>
           <ChatInput 
             chatMessages={chatMessages}
             setChatMessages={setChatMessages}
+            loading={loading}
+            setLoading={setLoading}
           />
           <ChatMessages 
             chatMessages={chatMessages}
           />
+          {loading && 
+            <ChatMessage 
+              sender="robot"
+              message="Thinking..."
+            />
+          }
         </>
       );
     }
@@ -209,4 +238,4 @@
 </body>
 </html>
 
-<!-- 1. When using React, do not use vanilla DOM, because react -->
+<!-- 1. When using React, do not use vanilla DOM, because react handles DOM -->

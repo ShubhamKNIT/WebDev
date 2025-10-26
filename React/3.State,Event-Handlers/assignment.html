@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Chatbot</title>
+</head>
+
+<body>
+  <div class="js-container"></div>
+  <script src="https://unpkg.com/supersimpledev/react.js"></script>
+  <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+  <script type="text/babel">
+
+    // 3a-f
+    // function ClickButton({ clickCnt, setClickCnt }) {
+    //   function incrementCnt() {
+    //     setClickCnt(clickCnt + 1);
+    //   }
+      
+    //   return (
+    //     <>
+    //       {(clickCnt > 0) && <p>You have clicked {clickCnt} times!</p>}
+    //       <button onClick={incrementCnt}>Click Me!</button> 
+    //     </>
+    //   );
+    // } 
+
+    // function ResetButton({ setClickCnt1, setClickCnt2 }) {
+    //   function resetCnt() {
+    //     setClickCnt1(0);
+    //     setClickCnt2(0);
+    //   }
+      
+    //   return (
+    //     <>
+    //       <button onClick={resetCnt}>Reset!</button> 
+    //     </>
+    //   );
+    // } 
+
+    // 3g-h
+    function Input({ inputText, setInputText }) {
+
+      function updateText(event) {
+        setInputText(event.target.value);
+      }
+
+      return (
+        <>
+          <input 
+            placeholder="Enter a text"
+            type="text"
+            value={inputText}
+            onChange={updateText}
+          />
+
+          <p>{inputText}</p>
+        </>
+      );
+    }
+
+    function ResetButton({ setInputText }) {
+      function resetText(event) {
+        setInputText("");
+      }
+
+      return (
+        <>
+          <button onClick={resetText}>Reset</button>
+        </>
+      );
+    }
+
+    function ExampleButton({ flag, setFlag }) {
+      function toggleExample() {
+        setFlag(!flag);
+      }
+
+      return (
+        <>
+          <button onClick={toggleExample}>Example</button>
+          {flag === true && <p>Alice</p>}
+        </>
+      );
+    }
+    
+    function App() {
+      // 3a-f
+      // const [clickCnt1, setClickCnt1] = React.useState(0);
+      // const [clickCnt2, setClickCnt2] = React.useState(0);
+      // return (
+      //   <>
+      //     <>
+      //       <ClickButton 
+      //         clickCnt={clickCnt1} 
+      //         setClickCnt={setClickCnt1}
+      //       />
+      //       <ClickButton 
+      //         clickCnt={clickCnt2} 
+      //         setClickCnt={setClickCnt2}
+      //       />
+      //     </>
+      //     {(clickCnt1 > 0 || clickCnt2 > 0) && <ResetButton
+      //       setClickCnt1={setClickCnt1}
+      //       setClickCnt2={setClickCnt2}
+      //     />}
+      //   </>
+      // );
+
+      // 3g-h
+      const [inputText, setInputText] = React.useState("");
+      const [flag, setFlag] = React.useState(false);
+      return (
+        <>
+          <Input 
+            inputText={inputText}
+            setInputText={setInputText}
+          />
+          <ResetButton 
+            setInputText={setInputText}
+          />
+          <ExampleButton 
+            flag={flag}
+            setFlag={setFlag}
+          />
+        </>
+      );
+    }
+
+    const container = document.querySelector('.js-container');
+    const root = ReactDOM.createRoot(container);
+    root.render(
+      <App />
+    );
+  </script>
+</body>
+</html>

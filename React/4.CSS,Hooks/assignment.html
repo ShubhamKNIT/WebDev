@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Chatbot</title>
+  <!-- 4a-c -->
+  <!-- <style>
+    button {
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+    }
+    .button-green {
+      background-color: rgb(25, 135, 84);
+    }
+    .button-red {
+      background-color: rgb(220, 53, 69);
+    }
+  </style> -->
+
+  <!-- 4d-e -->
+  <!-- <style>
+    button {
+      color: white;
+      background-color: rgb(0, 123, 255);
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      margin: 2px 5px;
+    }
+
+    .input-container {
+      display: flex;
+      flex-wrap: nowrap;
+    }
+
+    input {
+      width: 200px;
+      padding: 8px 8px 8px;
+      margin: 3px;
+    }
+
+  </style> -->
+  
+  <!-- 4h-i -->
+  <!-- <style>
+    body {
+      margin: 0px;
+    }
+    button {
+      color: white;
+      background-color: rgb(25, 135, 84);
+      border: none;
+      border-radius: 8px;
+      padding: 10px 8px;
+      margin: 5px;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgb(222, 222, 222);
+      height: 100vh;
+    }
+  </style> -->
+</head>
+
+<body>
+  <div class="js-container"></div>
+  <script src="https://unpkg.com/supersimpledev/react.js"></script>
+  <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.18/dayjs.min.js" integrity="sha512-FwNWaxyfy2XlEINoSnZh1JQ5TRRtGow0D6XcmAWmYCRgvqOUTnzCxPc9uF35u5ZEpirk1uhlPVA19tflhvnW1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/babel">
+
+    // 4a-c
+    // function Button ({ buttonText, setButtonText }) {
+    //   function toggleText() {
+    //     setButtonText((buttonText === "OFF") ? "ON" : "OFF");
+    //   }
+
+    //   return (
+    //     <>
+    //       <button 
+    //         onClick={toggleText}
+    //         className={(buttonText === "ON") ? "button-green" : "button-red"} 
+    //       >{buttonText}
+    //       </button> 
+    //     </>
+    //   );
+    // }
+
+    // 4d-e
+    // function Button({ buttonText , onClick}) {
+    //   return (
+    //     <> 
+    //       <button onClick={onClick}>{buttonText}</button>
+    //     </>
+    //   )
+    // }
+
+    // function Input({ placeholder, type}) {
+    //   if (type !== "") {
+    //     return (
+    //       <>
+    //         <input 
+    //           type={type}
+    //           id={crypto.randomUUID()}
+    //           placeholder={placeholder}
+    //         />
+    //       </>
+    //     );
+    //   }
+    //   else {
+    //     return (
+    //       <>
+    //         <input 
+    //           id={crypto.randomUUID()}
+    //           placeholder={placeholder}
+    //         />
+    //       </>
+    //     );
+    //   }
+    // }
+
+    // function InputContainer({ className, inputText, setInputText, placeholder, type }) {
+    //   return (
+    //     <div className={className}>
+    //       <Input 
+    //         placeholder={placeholder}
+    //         type={type}
+    //       />
+    //     </div>
+    //   );
+    // }
+
+    // 4h-i
+    // function Button({ text, onClick }) {
+    //   return (
+    //     <button onClick={onClick}>{text}</button>
+    //   )
+    // }
+
+    function App () {
+      // 4a-c
+      // const [buttonText, setButtonText] = React.useState("OFF");
+
+      // return (
+      //   <div>
+      //     <Button 
+      //       buttonText={buttonText}
+      //       setButtonText={setButtonText}
+      //     />
+      //   </div>
+      // );
+
+      // 4d-e
+      // const [showPassword, setShowPassword] = React.useState(false);
+      // const [inputEmailText, setInputEmailText] = React.useState("");
+      // const [inputPasswordText, setInputPasswordText] = React.useState("");
+
+      // function togglePassword() {
+      //   setShowPassword(!showPassword);
+      // }
+
+      // return (
+      //   <div>
+      //     <div>
+      //       <p>Hello, Welcome to CypherJET </p>  
+      //     </div>
+      //     <div>
+      //       <InputContainer
+      //         className="input-container"
+      //         inputText={inputEmailText}
+      //         setInputText={setInputEmailText}
+      //         placeholder="Email"
+      //         type="email"/>
+      //       <InputContainer 
+      //         className="input-container"
+      //         inputText={inputPasswordText}
+      //         setInputText={setInputPasswordText}
+      //         placeholder="Password"
+      //         type={showPassword ? "text" : "password"}/>
+      //     </div>
+      //     <div>
+      //       <Button 
+      //         buttonText="Login"/>
+      //       <Button 
+      //         buttonText="SignUp"/>
+      //       <Button 
+      //         buttonText="Toggle Password"
+      //         onClick={togglePassword}/>
+      //     </div>
+      //   </div>
+      // );
+
+      // 4f-g
+      // const [time, setTime] = React.useState(dayjs().format('HH:mm:ss'));
+      // // const timeRef = React.useRef(time);
+      
+      // React.useEffect(() => {
+      //   setInterval(() => {
+      //     setTime(dayjs().format('HH:mm:ss'));
+      //   }, 1000);
+      // });
+      // // console.log(time);
+
+      // 4h-i
+      // const [cnt, setCnt] = React.useState(0);
+      // const [autoClick, setAutoClick] = React.useState(false);
+      // const cntRef = React.useRef(cnt);
+
+      // React.useEffect(() => {
+      //   cntRef.current = cnt;
+      // }, [cnt]);
+      
+      // function toggleAuto() {
+      //   setAutoClick(!autoClick);
+      // }
+      // function updateCnt() {
+      //   setCnt(cnt + 1);
+      // }
+      // function resetCnt() {
+      //   setCnt(0);
+      // }
+      
+      // React.useEffect(() => {
+      //   if (!autoClick) return;
+
+      //   const intervalId = setInterval(() => {
+      //     setCnt(cntRef.current + 1);
+      //   }, 1000);
+
+      //   return () => clearInterval(intervalId);
+      // }, [autoClick]);
+
+      // const cntText = `Clicked ${cnt} times`;
+
+      // return (
+      //   <div>
+      //     <div className="button-container">
+      //       <Button text={cntText} onClick={updateCnt} />
+      //       <Button text="Reset" onClick={resetCnt} />
+      //       <Button text="Auto Click" onClick={toggleAuto} />
+      //     </div>
+      //   </div>
+      // );
+    }
+
+    const container = document.querySelector('.js-container');
+    const root = ReactDOM.createRoot(container);
+    root.render(
+      <App />
+    );
+  </script>
+</body>
+</html>
+
+<!-- 0. React Hooks: useState(), useEffect(), useRef(), ... -->
+<!-- 1. When using React, do not use vanilla DOM, because react handles DOM -->
+<!-- 2. React hook help in dynamic updation of HTML -->

@@ -1,18 +1,96 @@
+import axios from 'axios'
+import { useState, useEffect, Fragment } from 'react'
 import Header from '../components/Header'
 import './OrdersPage.css'
+import formatMoney from '../utils/money';
+import formatDate from '../utils/date';
 
-export default function OrderPage() {
+export default function OrderPage({ cart }) {
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    axios.get('/api/orders?expand=products')
+      .then((response) => {
+        setOrders(response.data);
+      });
+  }, []);
+
   return (
     <>
       <link rel="icon" type="image/png" href="https://supersimple.dev/images/orders-favicon.png" />
       <title>Orders</title>
-      <Header />
+      <Header cart={cart}/>
 
       <div className="orders-page">
         <div className="page-title">Your Orders</div>
 
         <div className="orders-grid">
-          <div className="order-container">
+          {orders.length > 0 && 
+            orders.map((order) => {
+              return (
+                <div key={order.id} className="order-container">
+
+                  <div className="order-header">
+                    <div className="order-header-left-section">
+                      <div className="order-date">
+                        <div className="order-header-label">Order Placed:</div>
+                        <div>{formatDate(order.orderTimeMs)}</div>
+                      </div>
+                      <div className="order-total">
+                        <div className="order-header-label">Total:</div>
+                        <div>{formatMoney(order.totalCostCents)}</div>
+                      </div>
+                    </div>
+
+                    <div className="order-header-right-section">
+                      <div className="order-header-label">Order ID:</div>
+                      <div>{order.id}</div>
+                    </div>
+                  </div>
+                  
+                  {
+                    order.products.map((orderProduct) => {
+                      return (
+                        <Fragment key={orderProduct.productId}>
+                          <div className="order-details-grid">
+                            <div className="product-image-container">
+                              <img src={orderProduct.product.image} />
+                            </div>
+
+                            <div className="product-details">
+                              <div className="product-name">
+                                {orderProduct.name}
+                              </div>
+                              <div className="product-delivery-date">
+                                Arriving on: {formatDate(orderProduct.estimatedDeliveryTimeMs)}
+                              </div>
+                              <div className="product-quantity">
+                                Quantity: {orderProduct.quantity}
+                              </div>
+                              <button className="buy-again-button button-primary">
+                                <img className="buy-again-icon" src="src/assets/images/icons/buy-again.png" />
+                                <span className="buy-again-message">Add to Cart</span>
+                              </button>
+                            </div>
+
+                            <div className="product-actions">
+                              <a href="/tracking">
+                                <button className="track-package-button button-secondary">
+                                  Track package
+                                </button>
+                              </a>
+                            </div>
+                          </div>
+                        </Fragment>
+                      )
+                    })
+                  }
+                </div>
+              )
+            })
+          }
+
+          {/* <div className="order-container">
 
             <div className="order-header">
               <div className="order-header-left-section">
@@ -140,7 +218,7 @@ export default function OrderPage() {
                 </a>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

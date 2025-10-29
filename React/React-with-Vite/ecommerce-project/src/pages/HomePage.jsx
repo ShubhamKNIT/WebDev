@@ -1,13 +1,54 @@
+import axios from 'axios'
+import { useEffect } from 'react'
 import Header from '../components/Header'
-import { products } from '../../starting-code/data/products.js'
 import './HomePage.css'
+import { useState } from 'react'
 
 export default function HomePage() {
+  // JS fetch
+  // fetch('http://localhost:3000/api/products') // fetch is a promise to get response in future
+  //   .then((response) => { 
+  //     // run code after promise is completed
+  //     // console.log(response)
+  //     response.json() // response is also a promise
+  //       .then((data) => {
+  //         console.log(data);
+  //       });
+  //   })
+
+  // fetch('http://localhost:3000/api/products')
+  //   .then((response) => {
+  //     return response.json();
+  //   }).then((data) => {
+  //     console.log(data);
+  //   });
+
+  const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
+
+  // axios to fetch the data 
+  // inside useEffect to run code only once even though react rerender
+  useEffect(() => {
+    axios.get('/api/products')
+      .then((response) => {
+        // console.log(response.data[0])
+        setProducts(response.data);
+      })
+  }, []);
+
+  useEffect(() => {
+    axios.get('/api/cart-items')
+      .then((response) => {
+        // console.log(response.data);
+        setCart(response.data);
+      })
+  }, []);
+
   return (
     <>
       <link rel="icon" type="image/png" href="https://supersimple.dev/images/home-favicon.png" />
       <title>Ecommerce Project</title>
-      <Header />
+      <Header cart={cart} />
 
       <div className="home-page">
         <div className="products-grid">

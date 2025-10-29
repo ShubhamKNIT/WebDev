@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router'
 import './CheckoutHeader.css'
 
-export default function CheckoutHeader() {
+export default function CheckoutHeader({ cart }) {
   return (
     <>
       <div className="checkout-header">
@@ -15,7 +15,7 @@ export default function CheckoutHeader() {
 
           <div className="checkout-header-middle-section">
             Checkout (<NavLink className="return-to-home-link"
-              to="/">3 items</NavLink>)
+              to="/">{cart.totalQuantity} items</NavLink>)
           </div>
 
           <div className="checkout-header-right-section">

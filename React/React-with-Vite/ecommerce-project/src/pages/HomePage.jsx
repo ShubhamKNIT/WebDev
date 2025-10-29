@@ -1,10 +1,10 @@
 import axios from 'axios'
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import Header from '../components/Header'
+import formatMoney from '../utils/money'
 import './HomePage.css'
-import { useState } from 'react'
 
-export default function HomePage() {
+export default function HomePage({ cart }) {
   // JS fetch
   // fetch('http://localhost:3000/api/products') // fetch is a promise to get response in future
   //   .then((response) => { 
@@ -24,7 +24,6 @@ export default function HomePage() {
   //   });
 
   const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState([]);
 
   // axios to fetch the data 
   // inside useEffect to run code only once even though react rerender
@@ -33,14 +32,6 @@ export default function HomePage() {
       .then((response) => {
         // console.log(response.data[0])
         setProducts(response.data);
-      })
-  }, []);
-
-  useEffect(() => {
-    axios.get('/api/cart-items')
-      .then((response) => {
-        // console.log(response.data);
-        setCart(response.data);
       })
   }, []);
 
@@ -73,7 +64,7 @@ export default function HomePage() {
                   </div>
 
                   <div className="product-price">
-                    ${(product.priceCents / 100).toFixed(2)}
+                    {formatMoney(product.priceCents)}
                   </div>
 
                   <div className="product-quantity-container">

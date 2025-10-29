@@ -4,6 +4,7 @@ import './OrdersPage.css'
 export default function OrderPage() {
   return (
     <>
+      <link rel="icon" type="image/png" href="https://supersimple.dev/images/orders-favicon.png" />
       <title>Orders</title>
       <Header />
 
@@ -33,7 +34,7 @@ export default function OrderPage() {
 
             <div className="order-details-grid">
               <div className="product-image-container">
-                <img src="images/products/athletic-cotton-socks-6-pairs.jpg" />
+                <img src="src/assets/images/products/athletic-cotton-socks-6-pairs.jpg" />
               </div>
 
               <div className="product-details">
@@ -47,7 +48,7 @@ export default function OrderPage() {
                   Quantity: 1
                 </div>
                 <button className="buy-again-button button-primary">
-                  <img className="buy-again-icon" src="images/icons/buy-again.png" />
+                  <img className="buy-again-icon" src="src/assets/images/icons/buy-again.png" />
                   <span className="buy-again-message">Add to Cart</span>
                 </button>
               </div>
@@ -61,7 +62,7 @@ export default function OrderPage() {
               </div>
 
               <div className="product-image-container">
-                <img src="images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg" />
+                <img src="src/assets/images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg" />
               </div>
 
               <div className="product-details">
@@ -75,7 +76,7 @@ export default function OrderPage() {
                   Quantity: 2
                 </div>
                 <button className="buy-again-button button-primary">
-                  <img className="buy-again-icon" src="images/icons/buy-again.png" />
+                  <img className="buy-again-icon" src="src/assets/images/icons/buy-again.png" />
                   <span className="buy-again-message">Add to Cart</span>
                 </button>
               </div>
@@ -112,7 +113,7 @@ export default function OrderPage() {
 
             <div className="order-details-grid">
               <div className="product-image-container">
-                <img src="images/products/intermediate-composite-basketball.jpg" />
+                <img src="src/assets/images/products/intermediate-composite-basketball.jpg" />
               </div>
 
               <div className="product-details">
@@ -126,7 +127,7 @@ export default function OrderPage() {
                   Quantity: 2
                 </div>
                 <button className="buy-again-button button-primary">
-                  <img className="buy-again-icon" src="images/icons/buy-again.png" />
+                  <img className="buy-again-icon" src="src/assets/images/icons/buy-again.png" />
                   <span className="buy-again-message">Add to Cart</span>
                 </button>
               </div>

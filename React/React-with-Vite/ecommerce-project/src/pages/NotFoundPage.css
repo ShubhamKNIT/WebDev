@@ -1,0 +1,11 @@
+.not-found-page {
+    /* background-color: red; */
+    margin-top: 40vh;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+p {
+    color: red;
+    font-size: 20px;
+}

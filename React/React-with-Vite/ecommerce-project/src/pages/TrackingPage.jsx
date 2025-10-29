@@ -1,17 +1,19 @@
+import { Link } from 'react-router'
 import Header from '../components/Header'
 import './TrackingPage.css'
 
 export default function TrackingPage() {
   return (
     <>
+      <link rel="icon" type="image/png" href="https://supersimple.dev/images/tracking-favicon.png" />
       <title>Tracking</title>
       <Header />
 
       <div className="tracking-page">
         <div className="order-tracking">
-          <a className="back-to-orders-link link-primary" href="/orders">
+          <Link className="back-to-orders-link link-primary" to="/orders">
             View all orders
-          </a>
+          </Link>
 
           <div className="delivery-date">
             Arriving on Monday, June 13
@@ -25,7 +27,7 @@ export default function TrackingPage() {
             Quantity: 1
           </div>
 
-          <img className="product-image" src="images/products/athletic-cotton-socks-6-pairs.jpg" />
+          <img className="product-image" src="src/assets/images/products/athletic-cotton-socks-6-pairs.jpg" />
 
           <div className="progress-labels-container">
             <div className="progress-label">

@@ -3,8 +3,9 @@ import { useState, useEffect } from 'react'
 import Header from '../../components/Header'
 import './HomePage.css'
 import ProductGrid from './ProductGrid'
+import { useSearchParams } from 'react-router'
 
-export default function HomePage({ cart }) {
+export default function HomePage({ cart, loadCart }) {
   // JS fetch
   // fetch('http://localhost:3000/api/products') // fetch is a promise to get response in future
   //   .then((response) => { 
@@ -24,6 +25,8 @@ export default function HomePage({ cart }) {
   //   });
 
   const [products, setProducts] = useState([]);
+  const [searchParams] = useSearchParams();
+  const search = searchParams.get('search');
 
   // axios to fetch the data 
   // inside useEffect to run code only once even though react rerender
@@ -40,13 +43,15 @@ export default function HomePage({ cart }) {
   useEffect(() => {
     // 1. create a function 
     const getHomeData = async () => {
-      const response = await axios.get('/api/products');
+      // const response = await axios.get('/api/products');
+      const urlPath = search ? `/api/products?search=${search}` : `/api/products`;
+      const response = await axios.get(urlPath);
       setProducts(response.data);
     };
 
     // 2. call it
     getHomeData();
-  }, []);
+  }, [search]);
 
   return (
     <>
@@ -55,7 +60,7 @@ export default function HomePage({ cart }) {
       <Header cart={cart} />
 
       <div className="home-page">
-        <ProductGrid products={products} />
+        <ProductGrid products={products} loadCart={loadCart} />
       </div>
     </>
   );

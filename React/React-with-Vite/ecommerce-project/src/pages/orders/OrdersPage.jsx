@@ -5,7 +5,7 @@ import './OrdersPage.css';
 import OrderHeader from './OrderHeader';
 import OrdersGrid from './OrdersGrid';
 
-export default function OrderPage({ cart }) {
+export default function OrderPage({ cart, loadCart }) {
   const [orders, setOrders] = useState([]);
 
   // useEffect(() => {
@@ -22,7 +22,7 @@ export default function OrderPage({ cart }) {
     }
 
     fetchOrderPageData();
-  }, [])
+  }, [cart])
 
   return (
     <>
@@ -45,7 +45,7 @@ export default function OrderPage({ cart }) {
                     order.products.map((orderProduct) => {
                       return (
                         <Fragment key={orderProduct.productId}>
-                          <OrdersGrid orderId={order.id} orderProduct={orderProduct}/>
+                          <OrdersGrid orderId={order.id} orderProduct={orderProduct} loadCart={loadCart}/>
                         </Fragment>
                       )
                     })

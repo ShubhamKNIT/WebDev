@@ -1,6 +1,16 @@
+import axios from 'axios'
 import { Link } from 'react-router'
 import formatDate from "../../utils/date"
-export default function OrdersGrid({ orderId, orderProduct }) {  
+export default function OrdersGrid({ orderId, orderProduct, loadCart }) {  
+  const addToCart = async () => {
+    await axios.post('/api/cart-items', {
+        productId: orderProduct.productId,
+        quantity: 1
+    });
+
+    await loadCart();
+  };
+  
   return (
     <>
       <div className="order-details-grid">
@@ -18,7 +28,8 @@ export default function OrdersGrid({ orderId, orderProduct }) {
           <div className="product-quantity">
             Quantity: {orderProduct.quantity}
           </div>
-          <button className="buy-again-button button-primary">
+          <button className="buy-again-button button-primary" 
+            onClick={addToCart}>
             <img className="buy-again-icon" src="src/assets/images/icons/buy-again.png" />
             <span className="buy-again-message">Add to Cart</span>
           </button>

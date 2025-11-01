@@ -44,7 +44,7 @@ export default function HomePage({ cart, loadCart }) {
     // 1. create a function 
     const getHomeData = async () => {
       // const response = await axios.get('/api/products');
-      const urlPath = search ? `/api/products?search=${search}` : `/api/products`;
+      const urlPath = search ? `/api/products?search=${search}` : '/api/products';
       const response = await axios.get(urlPath);
       setProducts(response.data);
     };

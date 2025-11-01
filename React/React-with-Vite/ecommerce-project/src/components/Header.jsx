@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from 'react';
-import { NavLink, useNavigate, useSearchParams } from 'react-router'
+import { NavLink, useNavigate } from 'react-router'
 import './Header.css'
 
 export default function Header({ cart }) {
-  const [searchText, setSearchText] = useState("");
-  const [searchParams] = useSearchParams();
-  const search = searchParams.get('search');
+  const navigate = useNavigate();
+  const [search, setSearch] = useState('');
+
   useEffect(() => {
     if (search) {
       const fetchSearch = async () => {
@@ -18,14 +18,12 @@ export default function Header({ cart }) {
   }, [search]);
 
   function updateSearch(event) {
-    setSearchText(event.target.value);
+    setSearch(event.target.value);
   }
 
-  let navigate = useNavigate();
-  function handleSearch () {
-    if (searchText.trim()) {
-      navigate(`/?search=${encodeURIComponent(searchText)}`);
-    }
+  const searchProducts = () => {
+    // console.log(search);
+    navigate(`/?search=${search}`);
   };
 
   let totalQuantity = 0;
@@ -46,9 +44,9 @@ export default function Header({ cart }) {
         </div>
 
         <div className="middle-section">
-          <input className="search-bar" type="text" placeholder="Search" value={searchText} onChange={updateSearch} />
+          <input className="search-bar" type="text" placeholder="Search" value={search} onChange={updateSearch} />
 
-          <button className="search-button" onClick={handleSearch}>
+          <button className="search-button" onClick={searchProducts}>
             <img className="search-icon" src="/images/icons/search-icon.png" />
           </button>
         </div>
